@@ -88,28 +88,30 @@ exports.handler = async (event) => {
       TransactionDetails,
       tableName
     );
-
+    const endpoint = event.requestContext?.http?.path || "Unknown Endpoint";
+    const method = event.requestContext?.http?.method || "Unknown Method";
     // Logging Lambda invocation
-    const LogsParams = {
-      FunctionName: "arn:aws:lambda:ap-south-1:345594590006:function:LogsFunction:Prod", // Replace with your logging Lambda ARN
-      InvocationType: "RequestResponse",  // Synchronous invocation, or use "Event" for async
-      Payload: JSON.stringify({
-        userPK,
-        action: "Added tools to inventory",
-        ToolsId,
-        Quantity: UpdatedQuantity,
-        Timestamp: new Date().toISOString(),
-        transactionDetails: TransactionDetails,
-        onHandDetails: OnHandDetails,
-      }),
-    };
+    // Call the logs function
+  const LogsParams = {
+    FunctionName: "arn:aws:lambda:ap-south-1:345594590006:function:LogsFunction:Prod",
+    InvocationType: "RequestResponse",
+    Payload: JSON.stringify({
+      companyName: sanitizedCompanyName,
+      userId: userPK,
+      endpoint,
+      method,
+      startTime: new Date().toISOString(),
+      endTime: new Date(new Date().getTime() + 1000).toISOString(),
+      dataProcessedKB: JSON.stringify(event.body).length / 1024,
+    }),
+  };
 
-    const LogsResponse = await lambda.invoke(LogsParams).promise();
-    if (LogsResponse.StatusCode !== 200) {
-      console.warn(
-        `Log function invocation failed with status code: ${LogsResponse.StatusCode}`
-      );
-    }
+  const LogsResponse = await lambda.invoke(LogsParams).promise();
+  if (LogsResponse.StatusCode !== 200) {
+    console.warn(
+      `Log function invocation failed with status code: ${LogsResponse.StatusCode}`
+    );
+  }
 
     return {
       statusCode: 200,
