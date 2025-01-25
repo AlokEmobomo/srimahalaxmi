@@ -1,0 +1,17 @@
+{
+  "name": "getvendornames",
+  "version": "1.0.0",
+  "description": "",
+  "main": "GetVendorNames.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.658.1",
+    "@aws-sdk/lib-dynamodb": "^3.658.1",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

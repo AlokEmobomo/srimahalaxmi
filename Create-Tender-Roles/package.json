@@ -1,0 +1,17 @@
+{
+  "name": "create_tender_user_management",
+  "version": "1.0.0",
+  "description": "",
+  "main": "CreateTender.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.699.0",
+    "@aws-sdk/lib-dynamodb": "^3.699.0",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

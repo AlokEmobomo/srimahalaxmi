@@ -1,0 +1,15 @@
+{
+  "name": "get_line_items_s3_function",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Get_Line_Items_Model.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/lib-dynamodb": "^3.699.0"
+  }
+}
